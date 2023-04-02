@@ -51,7 +51,7 @@ public class Converter {
                     "Dependency resource Manufacturer " + storeProduct.getProductType() + " was not found in DB.");
         }
 
-        log.info("Input Product successfully converted into DB Product.");
+        log.info(correlationId + "Input Product successfully converted into DB Product.");
         return Product.builder()
                 .productName(storeProduct.getProductName())
                 .productDescription(storeProduct.getProductDescription())
@@ -85,7 +85,7 @@ public class Converter {
             }
         }
 
-        log.info("Input Product successfully converted into DB Product.");
+        log.info(correlationId + "Input Product successfully converted into DB Product.");
         return Product.builder()
                 .productId(existingProduct.getProductId())
                 .productName(storeProduct.getProductName() == null ? existingProduct.getProductName() : storeProduct.getProductName())

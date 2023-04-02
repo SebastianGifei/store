@@ -13,7 +13,7 @@ import java.util.List;
 public class Validator {
 
     public void validate(StoreProduct storeProduct, String correlationId) throws DataException {
-        log.info("Validating Store Product's mandatory fields.");
+        log.info(correlationId + "Validating Store Product's mandatory fields.");
 
         List<ValidationError> errorList = new ArrayList<>();
         boolean ret = storeProduct.isValid(errorList);
@@ -22,6 +22,6 @@ public class Validator {
             throw new DataException(correlationId + "Missing required parameter(s): " + errorList);
         }
 
-        log.info("Product request is valid. All mandatory fields are present.");
+        log.info(correlationId + "Product request is valid. All mandatory fields are present.");
     }
 }
