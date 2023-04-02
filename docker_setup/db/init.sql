@@ -27,7 +27,7 @@ CREATE SEQUENCE public.store_product_type_seq
 
 -- public.store_product_type definition
 CREATE TABLE public.store_product_type (
-                                        product_type_id Integer NOT null default nextval('public.store_product_type_seq'),
+                                        product_type_id Integer NOT NULL default nextval('public.store_product_type_seq'),
                                         product_name varchar(100) NOT NULL,
                                         CONSTRAINT store_product_type_pk PRIMARY KEY (product_type_id),
 										CONSTRAINT store_product_type_name_key UNIQUE (product_name)
@@ -35,7 +35,7 @@ CREATE TABLE public.store_product_type (
 
 -- public.store_manufacturer definition
 CREATE TABLE public.store_manufacturer (
-                                        manufacturer_id Integer NOT null default nextval('public.store_manufacturer_seq'),
+                                        manufacturer_id Integer NOT NULL default nextval('public.store_manufacturer_seq'),
                                         manufacturer_name varchar(100) NOT NULL,
 										manufacturer_phone varchar(100) NOT NULL,
 										manufacturer_address varchar(100) NOT NULL,
@@ -45,16 +45,16 @@ CREATE TABLE public.store_manufacturer (
 
 -- public.store_product definition
 CREATE TABLE public.store_product (
-                                   product_id Integer NOT null default nextval('public.store_product_seq'),
+                                   product_id Integer NOT NULL default nextval('public.store_product_seq'),
                                    product_name varchar(100) NOT NULL,
-								   product_description varchar(100),
+								   product_description varchar(100) NULL,
 								   product_price varchar(100) NOT NULL,
-								   product_type int4 NOT NULL,
-								   product_manufacturer int4 NOT NULL,
+								   product_type_id int4 NOT NULL,
+								   manufacturer_id int4 NOT NULL,
                                    CONSTRAINT store_product_pk PRIMARY KEY (product_id),
                                    CONSTRAINT store_product__name_key UNIQUE (product_name),
-                                   CONSTRAINT store_product_fk_1 FOREIGN KEY (product_type) REFERENCES store_product_type(product_type_id),
-								   CONSTRAINT store_product_fk_2 FOREIGN KEY (product_manufacturer) REFERENCES store_manufacturer(manufacturer_id)
+                                   CONSTRAINT store_product_fk_1 FOREIGN KEY (product_type_id) REFERENCES store_product_type(product_type_id),
+								   CONSTRAINT store_product_fk_2 FOREIGN KEY (manufacturer_id) REFERENCES store_manufacturer(manufacturer_id)
 );
 
 --STORE_PRODUCT_TYPE
@@ -74,11 +74,11 @@ INSERT INTO public.store_manufacturer (manufacturer_name, manufacturer_phone, ma
 VALUES('HUAWEI', '+40723111222', '23 Basarabia BD.');
 
 --STORE_PRODUCT
-INSERT INTO public.store_product (product_name, product_description, product_price, product_type, product_manufacturer)
+INSERT INTO public.store_product (product_name, product_description, product_price, product_type_id, manufacturer_id)
 VALUES('GALAXY-WATCH-5', 'Latest Galaxy Watch', '300', 3, 1);
 
-INSERT INTO public.store_product (product_name, product_description, product_price, product_type, product_manufacturer)
+INSERT INTO public.store_product (product_name, product_description, product_price, product_type_id, manufacturer_id)
 VALUES('WATCH-GT-3', 'Latest GT Watch', '200', 3, 3);
 
-INSERT INTO public.store_product (product_name, product_description, product_price, product_type, product_manufacturer)
+INSERT INTO public.store_product (product_name, product_description, product_price, product_type_id, manufacturer_id)
 VALUES('IPHONE-14-PRO', 'Latest Iphone', '1100', 1, 2);
